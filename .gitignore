@@ -1,4 +1,4 @@
 phonegap/platforms/
 phonegap/plugins/
 .idea/
-server/*.psproj
+server/application/lib/Zend/

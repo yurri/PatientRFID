@@ -91,7 +91,7 @@ var app = {
 
             success: function(response) {
                 app.receivedEvent('request-ready', true);
-                $('#content').html(response);
+                // $('#content').html(response);
             },
 
             error: function() {

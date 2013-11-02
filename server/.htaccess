@@ -1,0 +1,13 @@
+SetEnv APPLICATION_PATH "c:/www/sites/patientrfid/application"
+SetEnv APPLICATION_URL  "http://patientrfid"
+
+# rewrite rules for Zend Framework
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ index.php [NC,L]
+
+# security measure: don't allow browsing of directories
+Options -Indexes

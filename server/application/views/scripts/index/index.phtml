@@ -1,0 +1,53 @@
+<div>
+    <p>Here you can map RFID tags read by the mobile application to Twitter profiles to read user information from
+    and to send back to the application.</p>
+</div>
+
+<form action="<?php echo APPLICATION_URL ?>/index/update" method="POST">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>RFID</th>
+                <th>Twitter Name</th>
+                <th></th>
+            </tr>
+            <tr></tr>
+        </thead>
+        <tbody>
+            <?php
+            if (count($this->patients)) {
+                foreach ($this->patients as $patient) {
+                    ?>
+                    <tr>
+                        <td>
+                            <?php echo $patient->tag; ?>
+                        </td>
+                        <td>
+                            <input type="text" name="twitter[<?php echo htmlentities($patient->tag); ?>]" value="<?php echo htmlentities($patient->twitter_name); ?>">
+                        </td>
+                        <td>
+                            <a href="<?php echo APPLICATION_URL ?>/index/forget?tag=<?php echo urlencode($patient->tag); ?>" class="btn btn-danger" ><i class="fam-exclamation"></i> Forget</a>
+                        </td>
+                    </tr>
+                    <?php
+                }
+                ?>
+                <tr>
+                    <td colspan="3">
+                        <input type="submit" class="btn btn-success" value="Update mapping">
+                    </td>
+                </tr>
+                <?php
+            } else {
+                ?>
+                <tr>
+                    <td colspan="3">
+                        No tags registered. Please use the mobile app to add them.
+                    </td>
+                </tr>
+                <?php
+            }
+            ?>
+        </tbody>
+    </table>
+</form>
