@@ -49,15 +49,19 @@ var app = {
     },
 
     // Updates the status pane
-    receivedEvent: function(eventId) {
+    receivedEvent: function(eventId, temporary) {
         var container = $('#status');
         container.find('.event').css('display', 'none');
         container.find('.event.' + eventId).css('display', 'block');
+
+        if (temporary === true) {
+            window.setTimeout(function() { app.receivedEvent('tag-listening'); }, 4 * 1000);
+        }
     },
 
     // what happens when a tag is read
     onTagRead: function(nfcEvent) {
-        app.receivedEvent('tag-read');
+        app.receivedEvent('tag-read', true);
 
         var tagId = nfcEvent.tag.id;
         var tagIdHex = nfc.bytesToHexString(tagId);
@@ -70,5 +74,29 @@ var app = {
         html += '<hr />' + jsonString;
 
         $('#content').html(html);
-	}
+
+        app.sendId(tagIdHex)
+	},
+
+    // sending a request to the remote webservice
+    sendId: function(tagIdHex) {
+        $.ajax({
+            type:           'GET',
+            url:            'http://akopov.webfactional.com',
+            crossDomain:    true,
+
+            beforeSend: function() {
+                app.receivedEvent('request');
+            },
+
+            success: function(response) {
+                app.receivedEvent('request-ready', true);
+                $('#content').html(response);
+            },
+
+            error: function() {
+                app.receivedEvent('request-failed', true);
+            }
+        });
+    }
 };

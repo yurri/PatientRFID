@@ -55,5 +55,7 @@
 	-->
 
     <access origin="http://127.0.0.1*" />
+    <access origin="http://akopov.webfactional.com" subdomains="true" />
+
     <content src="index.html" />
 </widget>

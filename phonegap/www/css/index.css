@@ -118,7 +118,7 @@ div#content {
     display: none;
 }
 .event.init-failed {
-    background-color:#4B946A;
+    background-color:#ff5555;
     display: none;
 }
 .event.tag-listening {
@@ -127,6 +127,18 @@ div#content {
 }
 .event.tag-read {
     background-color:#4B946A;
+    display: none;
+}
+.event.request {
+    background-color:#333333;
+    display: none;
+}
+.event.request-ready {
+    background-color:#4B946A;
+    display: none;
+}
+.event.request-failed {
+    background-color:#ff5555;
     display: none;
 }
 
