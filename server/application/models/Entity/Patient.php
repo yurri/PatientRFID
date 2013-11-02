@@ -1,5 +1,5 @@
 <?php
-require_once('TwitterAPIExchange.php'); // http://stackoverflow.com/questions/14836956/how-to-get-user-image-with-twitter-api-1-1
+require_once('TwitterApiExchange.php'); // http://stackoverflow.com/questions/14836956/how-to-get-user-image-with-twitter-api-1-1
 
 
 class Entity_Patient extends Zend_Db_Table_Row_Abstract {
