@@ -6,7 +6,7 @@ A quick project implementing one of the NHS Hack Day Cambridge ideas (http://wik
 Setup
 =====
 
-The project consists of two parts - Phonegap mobile application (targeting Android 4+) in "phonegap" folder and server part in "server" folder.
+The project consists of two parts: Phonegap mobile application (targeting Android 4+) in "phonegap" folder and Python Flask application in "server" folder.
 
 To build the Phonegap application run the following commands while in "phonegap" folder:
 
@@ -14,6 +14,8 @@ To build the Phonegap application run the following commands while in "phonegap"
 * `phonegap local build android`
 
 Android application *.apk file will appear under phonegap/platforms/android/bin
+
+Instructions on deploying Flask applications to WebFaction: http://flask.pocoo.org/snippets/65
 
 License
 =======
