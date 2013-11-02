@@ -35,45 +35,50 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        app.receivedEvent('deviceready');
-		
-		// nfc.addNdefListener(app.onNfc, app.onNfcSuccess, app.onNfcFailure);
+        app.receivedEvent('init-ready');
 
 		nfc.addTagDiscoveredListener(
-			app.onNfc,
-			function() {
-				console.log("Listening for non-NDEF tags.");
-			},
+			app.onTagRead,
+			function(result) {
+                app.receivedEvent('tag-listening');
+            },
 			function(reason) {
-				navigator.notification.alert(reason, function() {}, "There was a problem");			
+				app.receivedEvent('init-failed');
 			}
-		);		
+		);
     },
-	
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+    // Updates the status pane
+    receivedEvent: function(eventId) {
+        var container = $('#status');
+        container.find('.event').css('display', 'none');
+        container.find('.event.' + eventId).css('display', 'block');
 
-        console.log('Received Event: ' + id);
+        /*
+        var parentElement = document.getElementById('status');
+
+        // hiding all messages
+        var allMessages = parentElement.querySelector('.event');
+        allMessages.setAttribute('style', 'display:none;');
+
+        // displaying the requested message
+        var message = parentElement.querySelector('.event.' + eventId);
+        message.setAttribute('style', 'display:block;');
+        */
     },
-	
-	onNfc: function(nfcEvent) {
+
+    // what happens when a tag is read
+    onTagRead: function(nfcEvent) {
+        // navigator.notification.vibrate(100);
+        app.receivedEvent('tag-read');
+
+        var tagId = nfcEvent.tag.id;
+        var tagIdHex = nfc.bytesToHexString(tagId);
+        alert('Tag read: ' + tagId + '(' + tagIdHex + ')');
+
 		// display the tag as JSON
-		alert(JSON.stringify(nfcEvent.tag));
-		
-		navigator.notification.vibrate(100);
-	},
-	
-	onNfcSuccess: function(result) {
-		console.log("Listening for NFC Messages");
-	},
-	
-	onNfcFailure: function(reason) {
-		alert("Failed to add NDEF listener: " + reason);	
+		var jsonString = JSON.stringify(nfcEvent.tag);
+        var contentElement = document.getElementById('content');
+        contentElement.innerHTML = jsonString;
 	}
 };

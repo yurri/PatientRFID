@@ -10,7 +10,7 @@ The project consists of two parts - Phonegap mobile application (targeting Andro
 
 To build the Phonegap application run the following commands while in "phonegap" folder:
 
-* `phonegap local add plugin https://github.com/chariotsolutions/phonegap-nfc.git` - only run it once
+* `phonegap local plugin add https://github.com/chariotsolutions/phonegap-nfc.git` - only run it once
 * `phonegap local build android`
 
 Android application *.apk file will appear under phonegap/platforms/android/bin
