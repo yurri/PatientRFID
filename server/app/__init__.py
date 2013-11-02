@@ -27,7 +27,7 @@ def login():
 @app.after_request
 def shutdown_session(response):
     """Clear db session for correct multi-threading"""
-    """"db.session.remove()""""
+    """"db.session.remove()"""
     return response
 
 # adding a module
