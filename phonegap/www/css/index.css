@@ -66,10 +66,18 @@ body {
 }
 
 div#content {
-    margin-top: 50px;
-    min-height: 150px;
+    margin-top: 30px;
+    padding: 10px;
 
-    background-color: #E4E4E4;
+    width: 100%;
+    max-height: 450px;
+
+    font-size: 18pt;
+    word-wrap: break-word;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
     border: solid 1px #000000;
 }
 
@@ -84,6 +92,10 @@ div#content {
         top: 50%;
         margin-top: -240px;
     }
+
+    div#content {
+        max-height: 300px;
+    }
 }
 
 .event {
@@ -91,12 +103,12 @@ div#content {
     -webkit-border-radius:4px;
 
     color:#FFFFFF;
-    font-size:12px;
+    font-size: 24pt;
     text-align: center;
 
-    width: 200px;
+    width: 100%;
 
-    padding:2px 0px;
+    padding: 10px;
 }
 
 .event.init {
