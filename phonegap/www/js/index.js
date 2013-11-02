@@ -21,6 +21,7 @@ var app = {
     initialize: function() {
         this.bindEvents();
     },
+	
     // Bind Event Listeners
     //
     // Bind any events that are required on startup. Common events are:
@@ -28,13 +29,27 @@ var app = {
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
+	
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+		
+		// nfc.addNdefListener(app.onNfc, app.onNfcSuccess, app.onNfcFailure);
+
+		nfc.addTagDiscoveredListener(
+			app.onNfc,
+			function() {
+				console.log("Listening for non-NDEF tags.");
+			},
+			function(reason) {
+				navigator.notification.alert(reason, function() {}, "There was a problem");			
+			}
+		);		
     },
+	
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
@@ -45,5 +60,20 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-    }
+    },
+	
+	onNfc: function(nfcEvent) {
+		// display the tag as JSON
+		alert(JSON.stringify(nfcEvent.tag));
+		
+		navigator.notification.vibrate(100);
+	},
+	
+	onNfcSuccess: function(result) {
+		console.log("Listening for NFC Messages");
+	},
+	
+	onNfcFailure: function(reason) {
+		alert("Failed to add NDEF listener: " + reason);	
+	}
 };
