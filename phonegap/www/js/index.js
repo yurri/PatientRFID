@@ -53,32 +53,22 @@ var app = {
         var container = $('#status');
         container.find('.event').css('display', 'none');
         container.find('.event.' + eventId).css('display', 'block');
-
-        /*
-        var parentElement = document.getElementById('status');
-
-        // hiding all messages
-        var allMessages = parentElement.querySelector('.event');
-        allMessages.setAttribute('style', 'display:none;');
-
-        // displaying the requested message
-        var message = parentElement.querySelector('.event.' + eventId);
-        message.setAttribute('style', 'display:block;');
-        */
     },
 
     // what happens when a tag is read
     onTagRead: function(nfcEvent) {
-        // navigator.notification.vibrate(100);
         app.receivedEvent('tag-read');
 
         var tagId = nfcEvent.tag.id;
         var tagIdHex = nfc.bytesToHexString(tagId);
-        alert('Tag read: ' + tagId + '(' + tagIdHex + ')');
+        var html = 'Tag read: ' + tagId + ' (' + tagIdHex + ')';
 
-		// display the tag as JSON
+        html += '. Requesting information now...';
+
+		// display tag information as JSON for debug purposes;
 		var jsonString = JSON.stringify(nfcEvent.tag);
-        var contentElement = document.getElementById('content');
-        contentElement.innerHTML = jsonString;
+        html += '<hr />' + jsonString;
+
+        $('#content').html(html);
 	}
 };

@@ -77,8 +77,6 @@ div#content {
 
     overflow-y: auto;
     overflow-x: hidden;
-
-    border: solid 1px #000000;
 }
 
 /* Landscape layout (with min-width) */
@@ -99,8 +97,8 @@ div#content {
 }
 
 .event {
-    border-radius:4px;
-    -webkit-border-radius:4px;
+    border-radius:10px;
+    -webkit-border-radius:10px;
 
     color:#FFFFFF;
     font-size: 24pt;
