@@ -55,7 +55,10 @@ var app = {
         container.find('.event.' + eventId).css('display', 'block');
 
         if (temporary === true) {
-            window.setTimeout(function() { app.receivedEvent('tag-listening'); }, 4 * 1000);
+            window.setTimeout(
+                function() { app.receivedEvent('tag-listening'); },
+                5 * 1000
+            );
         }
     },
 
@@ -96,16 +99,23 @@ var app = {
                     } else if (response.tag === 'found') {
                         if (response.twitter) {
                             app.receivedEvent('tag-found', true);
-                            html = response.twitter.name + '<br/>' + response.twitter.location + '<br/>' + response.twitter.description + '<br/><img src="' + response.twitter.profile_image_url + '">';
+
+                            html =
+                                '<span class="field">' + response.twitter.name + '</span>'
+                                + '<br/><br/>'
+                                + '<span class="field">' + response.twitter.location + '</span>'
+                                + '<br/><br/>'
+                                + '<span class="field">' + response.twitter.description + '</span>'
+                            ;
 
                         } else {
                             app.receivedEvent('tag-wrong', true);
-                            html = 'Tag ' + tagIdHex + ' mapped profile incorrect or not authorised';
+                            html = 'Profile mapped for tag <strong>' + tagIdHex + '</strong> is not valid or not initialised.';
                         }
                     }
                 }
 
-                $('#content').html(html);
+                $('#content').html(html /* + JSON.stringify(response)*/);
             },
 
             error: function() {
