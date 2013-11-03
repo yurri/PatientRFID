@@ -24,7 +24,6 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <!-- <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.3.0.min.css" /> -->
 
         <title>NHS Hack Day</title>
     </head>
@@ -34,11 +33,14 @@
                 <p class="event init">Initialising...</p>
                 <p class="event init-ready">Initialised</p>
                 <p class="event init-failed">Failed to initialise</p>
+
                 <p class="event tag-listening">Listening...</p>
-                <p class="event tag-read">Tag read</p>
-                <p class="event request">Requesting data...</p>
-                <p class="event request-ready">Data obtained</p>
-                <p class="event request-failed">No data available</p>
+                <p class="event tag-read">Tag read, requesting data...</p>
+                <p class="event tag-found">Data obtained</p>
+                <p class="event tag-new">Tag recognised</p>
+                <p class="event tag-wrong">Tag mapping wrong</p>
+
+                <p class="event request-failed">No data found: check mappings</p>
             </div>
 
             <div id="content">Tap a tag to retrieve the data...</div>
@@ -48,7 +50,6 @@
 		<script type="text/javascript" src="phonegap-nfc.js"></script>
 
         <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
-        <!-- <script type="text/javascript" src="js/jquery.mobile-1.3.0.min.js"></script> -->
 
         <script type="text/javascript" src="js/index.js"></script>
 		

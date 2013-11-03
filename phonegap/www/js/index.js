@@ -66,18 +66,6 @@ var app = {
         var tagId = nfcEvent.tag.id;
         var tagIdHex = nfc.bytesToHexString(tagId);
 
-        /*
-        var html = 'Tag read: ' + tagId + ' (' + tagIdHex + ')';
-
-        html += '. Requesting information now...';
-
-		// display tag information as JSON for debug purposes;
-		 var jsonString = JSON.stringify(nfcEvent.tag);
-        html += '<hr />' + jsonString;
-
-        $('#content').html(html);
-        */
-
         app.sendId(tagIdHex)
 	},
 
@@ -91,22 +79,27 @@ var app = {
             crossDomain:    true,
 
             beforeSend: function() {
-                app.receivedEvent('request');
+                app.receivedEvent('tag-read');
             },
 
             success: function(response) {
-                app.receivedEvent('request-ready', true);
-
                 var html = '';
+
                 if (response.error) {
-                    html = 'Tag ' + tagIdHex + ' - service returned an error: ' + error;
+                    app.receivedEvent('request-failed', true);
+                    html = 'Tag ' + tagIdHex + ' read, but service returned an error: ' + error;
                 } else {
                     if (response.tag === 'new') {
+                        app.receivedEvent('tag-new', true);
                         html = 'Tag ' + tagIdHex + ' registered successfully. Please visit <a href="http://akopov.webfactional.com/patientrfid">http://akopov.webfactional.com/patientrfid</a> to set up a profile';
+
                     } else if (response.tag === 'found') {
                         if (response.twitter) {
-                            html = response.twitter.name + '<br/>' + response.twitter.location + '<br/>' + response.twitter.description + '<br/><img src="">' + response.twitter.profile_image_url;
+                            app.receivedEvent('tag-found', true);
+                            html = response.twitter.name + '<br/>' + response.twitter.location + '<br/>' + response.twitter.description + '<br/><img src="' + response.twitter.profile_image_url + '">';
+
                         } else {
+                            app.receivedEvent('tag-wrong', true);
                             html = 'Tag ' + tagIdHex + ' mapped profile incorrect or not authorised';
                         }
                     }
