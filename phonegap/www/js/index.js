@@ -94,7 +94,7 @@ var app = {
                 } else {
                     if (response.tag === 'new') {
                         app.receivedEvent('tag-new', true);
-                        html = 'Tag ' + tagIdHex + ' registered successfully. Please visit <a href="http://akopov.webfactional.com/patientrfid">http://akopov.webfactional.com/patientrfid</a> to set up a profile';
+                        html = 'Tag ' + tagIdHex + ' registered successfully - map it at <a href="http://akopov.webfactional.com/patientrfid">http://akopov.webfactional.com/patientrfid</a>';
 
                     } else if (response.tag === 'found') {
                         if (response.twitter) {

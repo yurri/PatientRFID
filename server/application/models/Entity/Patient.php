@@ -29,6 +29,9 @@ class Entity_Patient extends Zend_Db_Table_Row_Abstract {
         ;
 
         $json = json_decode($strJson);
+        if (isset($json->errors)) {
+            throw new Exception("Twitter name invalid or doesn't exist");
+        }
 
         return $json;
     }
