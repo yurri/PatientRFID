@@ -94,14 +94,15 @@ var app = {
                 } else {
                     if (response.tag === 'new') {
                         app.receivedEvent('tag-new', true);
-                        html = 'Tag ' + tagIdHex + ' registered successfully - map it at <a href="http://akopov.webfactional.com/patientrfid">http://akopov.webfactional.com/patientrfid</a>';
+                        html = 'Tag <strong>' + tagIdHex + '</strong> registered successfully - map it at <a href="http://akopov.webfactional.com/patientrfid">http://akopov.webfactional.com/patientrfid</a>';
 
                     } else if (response.tag === 'found') {
                         if (response.twitter) {
                             app.receivedEvent('tag-found', true);
 
-                            html =
-                                '<span class="field">' + response.twitter.name + '</span>'
+                            html = '<strong>' + tagIdHex + '</strong>'
+                                + '<br/><br/>'
+                                + '<span class="field">' + response.twitter.name + '</span>'
                                 + '<br/><br/>'
                                 + '<span class="field">' + response.twitter.location + '</span>'
                                 + '<br/><br/>'
